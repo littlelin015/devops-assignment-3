@@ -1,0 +1,66 @@
+name: Update README
+
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: write
+
+jobs:
+  update-readme:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Update README
+        shell: bash
+        run: |
+          python <<'PY'
+          from pathlib import Path
+          import subprocess
+
+          readme = Path("README.md")
+          content = readme.read_text(encoding="utf-8")
+
+          start_marker = "<!-- AUTO_UPDATE_START -->"
+          end_marker = "<!-- AUTO_UPDATE_END -->"
+
+          if start_marker not in content or end_marker not in content:
+              raise SystemExit("README markers not found")
+
+          commits = subprocess.check_output(
+              ["git", "log", "-5", "--pretty=format:- `%h` %s"],
+              text=True
+          ).strip()
+
+          start = content.index(start_marker) + len(start_marker)
+          end = content.index(end_marker)
+
+          new_content = (
+              content[:start]
+              + "\n\n"
+              + commits
+              + "\n\n"
+              + content[end:]
+          )
+
+          readme.write_text(new_content, encoding="utf-8")
+          PY
+
+      - name: Commit and push changes
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          if git diff --quiet README.md; then
+            echo "README is already up to date."
+            exit 0
+          fi
+
+          git add README.md
+          git commit -m "chore: update README activity"
+          git push
