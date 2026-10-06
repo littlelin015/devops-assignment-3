@@ -7,7 +7,7 @@ update using GitHub Actions.
 
 <!-- AUTO_UPDATE_START -->
 
-- `4a8c8a2` chore: update README activity
+- `2b382a1` chore: update README activity
 
 <!-- AUTO_UPDATE_END -->
 
