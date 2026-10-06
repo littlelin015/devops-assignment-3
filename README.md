@@ -1,2 +1,16 @@
-# devops-assignment-3
-Auto-Updating README via GitHub Actions + Project Management Linkage
+# DevOps Assignment 3
+
+This project demonstrates an automated README
+update using GitHub Actions.
+
+## Recent Repository Activity
+
+<!-- AUTO_UPDATE_START -->
+
+No activity yet.
+
+<!-- AUTO_UPDATE_END -->
+
+## Project Management
+
+This project is managed using GitHub Projects.
