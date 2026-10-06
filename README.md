@@ -7,7 +7,7 @@ update using GitHub Actions.
 
 <!-- AUTO_UPDATE_START -->
 
-- `2149c59` chore: update README activity
+- `dd83279` Ignore README.md in update-readme workflow
 
 <!-- AUTO_UPDATE_END -->
 
